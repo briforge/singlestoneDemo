@@ -1,0 +1,3 @@
+INSERT INTO contacts (id, firstName, lastName) VALUES (1, 'Harry', 'Potter')
+INSERT INTO contacts (id, firstName, lastName, street, city, state, zip) VALUES (2, 'Hermione', 'Granger', "4 Privet Drive", "Little Whinging", "IN", "46256")
+INSERT INTO contacts (id, firstName, lastName, street, city, state, zip, phonenumber, phonetype) VALUES (3, 'Ron', 'Weasley', "The Burrow", "Some Field", "UK", "53220")
