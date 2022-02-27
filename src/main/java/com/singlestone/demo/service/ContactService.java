@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,8 +18,17 @@ public class ContactService {
     @Autowired
     ContactRepository repository;
 
+    @Autowired
+    PhoneService phoneService;
+
     public List<CallListContact> getCallList() {
-        return repository.getCallList().stream().map(contact -> new CallListContact(contact.getName(), contact.getPhone().getNumber())).collect(Collectors.toList());
+        Comparator<CallListContact> lastNameComparator = (c1, c2) -> c1.getName().getLast().compareTo(c2.getName().getLast());
+        Comparator<CallListContact> firstNameComparator = (c1, c2) -> c1.getName().getFirst().compareTo(c2.getName().getFirst());
+
+        return phoneService.getHomePhones().stream()
+                .map(phone -> new CallListContact(phone.getContact().getName(), phone.getNumber()))
+                .sorted(lastNameComparator.thenComparing(firstNameComparator))
+                .collect(Collectors.toList());
     }
 
     public Contact updateContact(Contact newContact, Long id) throws ContactNotFoundException {
@@ -27,28 +37,15 @@ public class ContactService {
                     contact.getName().setFirst(newContact.getName().getFirst() );
                     contact.getName().setLast(newContact.getName().getLast() );
                     contact.getName().setMiddle(newContact.getName().getMiddle() );
-                    if(contact.getAddress() == null) {
-                        contact.setAddress(newContact.getAddress());
-                    } else {
-                        if(newContact.getAddress() == null) {
-                            contact.setAddress(null);
-                        } else {
-                            contact.getAddress().setStreet(newContact.getAddress().getStreet());
-                            contact.getAddress().setCity(newContact.getAddress().getCity());
-                            contact.getAddress().setState(newContact.getAddress().getState());
-                            contact.getAddress().setZip(newContact.getAddress().getZip());
-                        }
-                    }
-                    if(contact.getPhone() == null) {
-                        contact.setPhone(newContact.getPhone());
-                    } else {
-                        if(newContact.getPhone() == null) {
-                            contact.setPhone(null);
-                        } else {
-                            contact.getPhone().setNumber(newContact.getPhone().getNumber());
-                            contact.getPhone().setType(newContact.getPhone().getType());
-                        }
-                    }
+                    contact.setAddress(newContact.getAddress());
+
+                    // have to do this because of some black box magic behind @OneToMany
+                    contact.getPhones().clear();
+                    contact.getPhones().addAll(newContact.getPhones());
+                    contact.getPhones().forEach(phone -> {
+                        phone.setContact(contact);
+                    });
+
                     contact.setEmail(newContact.getEmail());
                     return repository.save(contact);
                 })
