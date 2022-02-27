@@ -13,7 +13,9 @@ public class Name {
 
     @Column(name = "firstName")
     private String first;
+    @Column(name = "middleName")
     private String middle;
+    @Column(name = "lastName")
     private String last;
 
     public Name(String first, String last) {
