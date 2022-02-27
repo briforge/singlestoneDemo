@@ -1,9 +1,14 @@
 package com.singlestone.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -24,6 +29,21 @@ public class Contact {
 
     private Name name;
     private Address address;
-    private Phone phone;
+
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonProperty("phone")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Phone> phones = new HashSet<>();
+
     private String email;
+
+    public void addPhone(Phone phone) {
+        phones.add(phone);
+        phone.setContact(this);
+    }
+    public void removePhone(Phone phone) {
+        phones.remove(phone);
+        phone.setContact(null);
+    }
 }

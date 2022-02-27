@@ -1,23 +1,33 @@
 package com.singlestone.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Data
 @Embeddable
+@Entity
+@Table(name = "phones")
 public class Phone {
 
     public enum PhoneType {home, work, mobile};
 
-    @Column(name = "phoneNumber")
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
+
     private String number;
-    @Column(name = "phoneType")
     @Enumerated(EnumType.STRING)
     private PhoneType type;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
+    private Contact contact;
 
     public Phone() {}
 

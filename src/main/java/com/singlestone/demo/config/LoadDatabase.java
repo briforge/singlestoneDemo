@@ -27,28 +27,28 @@ public class LoadDatabase {
         address.setZip("46256");
         harry.setAddress(address);
         Phone phone = new Phone("317-867-5309", Phone.PhoneType.home);
-        harry.setPhone(phone);
+        harry.addPhone(phone);
 
         Contact james = new Contact("James", "Potter");
         Phone phoneJames = new Phone("123-555-1212", Phone.PhoneType.home);
-        james.setPhone(phoneJames);
+        james.addPhone(phoneJames);
 
         Contact lily = new Contact("Lily", "Potter");
         Phone phoneLilly = new Phone("123-555-1212", Phone.PhoneType.home);
-        lily.setPhone(phoneLilly);
+        lily.addPhone(phoneLilly);
 
         Contact hermione = new Contact("Hermione", "Granger");
 
         Contact ron = new Contact("Ron", "Weasley");
         Phone phoneRon = new Phone("317-123-4567", Phone.PhoneType.mobile);
-        ron.setPhone(phoneRon);
+        ron.addPhone(phoneRon);
 
         Contact arthur = new Contact("Arthur", "Weasley");
         Phone phoneBurrow = new Phone("654-777-4444", Phone.PhoneType.home);
-        arthur.setPhone(phoneBurrow);
+        arthur.addPhone(phoneBurrow);
 
         Contact molly = new Contact("Molly", "Weasley");
-        molly.setPhone(phoneBurrow);
+        molly.addPhone(phoneBurrow);
 
         return args -> {
             log.info("PreLoading " + repo.save(harry));
