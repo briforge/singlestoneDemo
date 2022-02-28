@@ -5,7 +5,7 @@ Take home exercise for SingleStone Back End Java
 You probably already know this, but you can start the app by running `mvnw spring-boot:run` from the root
 
 # Testing
-I am a big advocate of thorough testing, unit, integration, and more. But in this case, I don't think there's much to test with Unit Tests. There's plenty to test wih Integration tests, and with @DataJpaTest making repository testing much easier than it used to be, I would normally have tests for that.
+I am a big advocate of thorough testing; unit, integration, and more. But in this case, I don't think there's much to test with Unit Tests. There's plenty to test with Integration tests, and with @DataJpaTest making repository testing much easier than it used to be, I would normally have tests for that.
 
 I did add the Postman collection that I was using to test the endpoints, in case that helps. It's under /src/test/resources.
 
