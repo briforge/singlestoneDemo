@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "3f3c58e2-b06b-4224-a938-11f1ed6a2b4e",
+		"name": "singlestoneDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Contacts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contacts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Draco\",\r\n        \"last\": \"Malfoy\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/contacts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Contact",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Draco\",\r\n        \"last\": \"Malfoy\"\r\n    },\r\n    \"phone\": [\r\n        {\r\n            \"number\": \"222-333-4444\",\r\n            \"type\": \"home\"\r\n        }\r\n    ],\r\n    \"email\": \"draco.malfoy@slytherin.org\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/contacts/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Contact",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": {\r\n        \"first\": \"Draco\",\r\n        \"last\": \"Malfoy\"\r\n    },\r\n    \"email\": \"draco.malfoy@slytherin.org\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/contacts/8",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Contact",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contacts/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Call List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/contacts/call-list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contacts",
+						"call-list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
